@@ -1,7 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Button, TextField } from "@mui/material";
+import socket from "./socket";
+import ChatItem from "./Chatitem";
 
 function Chatbox() {
+  // messages = [ { body : 'rochafi has joined' }, {}, {} .. ]
+  const [messages, setMessages] = useState([]);
+
+  useEffect(() => {
+    socket.on("recieve-message", (message) => {
+      setMessages((prevMessages) => [...prevMessages, message]);
+    });
+  }, []);
+
   return (
     <Box
       sx={{
@@ -14,7 +25,11 @@ function Chatbox() {
       }}
     >
       {/* Menampilkan pesan */}
-      <div style={{ height: 420 }}>Pesan akan tampil disini</div>
+      <div style={{ height: 420 }}>
+        {messages.map((message) => (
+          <ChatItem message={message} />
+        ))}
+      </div>
       {/* Input pesan */}
       <div style={{ width: "97%", display: "flex", margin: "10px auto" }}>
         <TextField id="outlined-basic" variant="outlined" />

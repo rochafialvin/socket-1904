@@ -13,6 +13,14 @@ io.on("connection", (socket) => {
   socket.on("join-room", (data) => {
     const { username, room } = data;
     socket.join(room);
+    const message = {
+      body: `${username} has joined`,
+    };
+    // pengirim tidak dapat melihat pesannya sendiri
+    // socket.to(room).emit("recieve-message", message);
+
+    // pengirim dapat melihat pesannya sendiri
+    io.to(room).emit("recieve-message", message);
   });
 });
 
