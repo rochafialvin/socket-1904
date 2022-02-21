@@ -2,7 +2,7 @@ import { Box } from "@mui/material";
 import React from "react";
 
 function ChatItem({ message }) {
-  const { body } = message;
+  const { username, body, time } = message;
   return (
     <Box
       sx={{
@@ -17,12 +17,30 @@ function ChatItem({ message }) {
     >
       <p
         style={{
+          fontWeight: "bold",
+          color: "white",
+          fontSize: "1.2em",
+        }}
+      >
+        {username}
+      </p>
+      <p
+        style={{
           marginBlock: 2,
           fontSize: "1.2em",
           color: "white",
         }}
       >
         {body}
+      </p>
+      <p
+        style={{
+          fontSize: "0.8em",
+          textAlign: "right",
+          color: "#cecece",
+        }}
+      >
+        {time}
       </p>
     </Box>
   );

@@ -46,7 +46,7 @@ function App() {
       )}
       {isJoinRoom ? (
         <div>
-          <Chatbox />
+          <Chatbox username={username} room={room} />
         </div>
       ) : null}
     </div>
